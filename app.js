@@ -1,7 +1,7 @@
 "use strict"
 
 const horasExtras = require("./srcCode/HorasExtras")
-const mostrarFecha = require("./srcCode/mostrarFecha")
+const CalcHHEE = require("./srcCode/CalcHHEE")
 
 const command = process.argv[2];
 const dirFile = process.argv[3];
@@ -18,8 +18,8 @@ switch (command){
     case "HsExtra":
         horasExtras(dirFile);
         break;
-    case "fecha":
-        mostrarFecha(dirFile);
+    case "calcHHEE":
+        CalcHHEE(dirFile);
         break;
     default:
         console.log("error");
