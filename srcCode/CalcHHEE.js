@@ -3,25 +3,9 @@ const XLSX = require("xlsx");
 // 0 domingo, 1 lunes, 2 martes, 3 miercoles, 4 jueves, 5 viernes, 6 sabado
 // 0.875 === 21:00 0.2083 === 05:00 0.54 === 13:00
 
-const CalcHHEE = (dirFile) => {
-    let e_opt = { bookType: 'xlsx', cellStyles: true, sheetStubs: true }
-    const excel = XLSX.readFile(`./data/${dirFile}`, e_opt)
-    const nombreHojas = excel.SheetNames;
-    const data = excel.Sheets[nombreHojas[3]];
+const CalcHHEE = (datos) => {
 
-    // let horasR = data[`F98`] || false
-    // let horasT = data[`E98`] || false
-    // let horasExtras = data[`I98`] || false
-    // let dia = data[`D98`] ? new Date(data[`D98`].w).getDay() : false
-    // let resultadoCI = `L98`
-    // data[resultadoCI] = !data[resultadoCI] ? {t:"z"} : data[resultadoCI];
-    // console.log(hheeCI(dia, horasExtras.v, horasT.v, horasR.v))
-    // XLSX.utils.sheet_add_aoa(data,
-    //     [[hheeCI(dia, horasExtras.v, horasT.v, horasR.v)]], { origin: resultadoCI })
-    //     data[resultadoCI].z = "h:mm"
-    // console.log(data[resultadoCI])
-    aplyHHEEC(data);
-    XLSX.writeFile(excel, `./data/${dirFile}`, e_opt);
+    aplyHHEEC(datos);
 }
 
 const hheeC = (dia, horasT, horasR) => {
