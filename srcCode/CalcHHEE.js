@@ -1,7 +1,7 @@
 "use strict"
 const XLSX = require("xlsx");
 // 0 domingo, 1 lunes, 2 martes, 3 miercoles, 4 jueves, 5 viernes, 6 sabado
-// 0.88 === 21:00 0.21 === 05:00 0.54 === 13:00
+// 0.875 === 21:00 0.2083 === 05:00 0.54 === 13:00
 
 const CalcHHEE = (dirFile) => {
     let e_opt = { bookType: 'xlsx', cellStyles: true, sheetStubs: true }
@@ -24,26 +24,32 @@ const CalcHHEE = (dirFile) => {
     XLSX.writeFile(excel, `./data/${dirFile}`, e_opt);
 }
 
-const hheeC = (dia, horas, horasT, horasR) => {
-    return dia >= 1 && dia <= 5 && horasR <= 0.88 && horasR >= 0.21
-        ? (horas)
-        : dia >= 1 && dia <= 5 && horasR > 0.88 && horasT < 0.88
-            ? (0.88 - horasT)
-            : ("-")
+const hheeC = (dia, horasT, horasR) => {
+    return dia >= 1 && dia <= 5 && horasT < 0.875 && horasT >= 0.2083 && horasR <= 0.875 && horasR > 0.2083
+        ? horasR - horasT
+        : dia >= 1 && dia <= 5 && horasT < 0.875 && horasT >= 0.2083 && horasR > 0.875
+            ? 0.875 - horasT
+            : dia >= 1 && dia <= 5 && horasT < 0.2083 && horasR <= 0.875 && horasR > 0.2083
+                ? horasR - 0.2083
+                : dia >= 1 && dia <= 5 && horasT < 0.875 && horasR <= 0.2083
+                ? 0.875 - horasT
+                : dia >= 1 && dia <= 5 && horasT < 0.2083 && horasR > 0.875
+                    ? 0.875 - 0.2083
+                    : "-"
 }
 const hheeCI = (dia, horas, horasT, horasR) => {
-    const horasExtra = dia >= 1 && dia <= 5 && horasT > horasR && horasR <= 0.21 && horasT >= 0.88
+    const horasExtra = dia >= 1 && dia <= 5 && horasT > horasR && horasR <= 0.2083 && horasT >= 0.875
         ? (horasR + 1) - horasT
-        : dia >= 1 && dia <= 5 && horasT > horasR && horasR >= 0.21 && horasT >= 0.88
-            ? (0.21 + 1) - horasT
-            : dia >= 1 && dia <= 5 && horasT > horasR && horasR >= 0.21 && horasT <= 0.88
-                ? (0.21 + 1) - 0.88
-                : dia >= 1 && dia <= 5 && horasT > horasR && horasR <= 0.21 && horasT <= 0.88
-                    ? (horasR + 1) - 0.88
-                    : dia >= 1 && dia <= 5 && horasT >= 0.88
+        : dia >= 1 && dia <= 5 && horasT > horasR && horasR >= 0.2083 && horasT >= 0.875
+            ? (0.2083 + 1) - horasT
+            : dia >= 1 && dia <= 5 && horasT > horasR && horasR >= 0.2083 && horasT <= 0.875
+                ? (0.2083 + 1) - 0.875
+                : dia >= 1 && dia <= 5 && horasT > horasR && horasR <= 0.2083 && horasT <= 0.875
+                    ? (horasR + 1) - 0.875
+                    : dia >= 1 && dia <= 5 && horasT >= 0.875
                         ? horasR - horasT
-                        : dia >= 1 && dia <= 5 && horasT < 0.88
-                            ? horasR - 0.88
+                        : dia >= 1 && dia <= 5 && horasT < 0.875 && horasR > 0.875
+                            ? horasR - 0.875
                             : dia === 0
                                 ? horas
                                 : "-"
@@ -69,7 +75,7 @@ const aplyHHEEC = (datos) => {
             (
                 XLSX.utils.sheet_add_aoa(datos,
                     [[
-                        hheeC(dia, horasExtras.v, horasT.v, horasR.v),
+                        hheeC(dia, horasT.v, horasR.v),
                         hheeCI(dia, horasExtras.v, horasT.v, horasR.v)]], { origin: resultadoC })
                 , datos[resultadoC].z = "h:mm"
                 , datos[resultadoCI].z = "h:mm"
