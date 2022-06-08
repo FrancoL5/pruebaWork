@@ -32,14 +32,22 @@ const hheeC = (dia, horas, horasT, horasR) => {
             : ("-")
 }
 const hheeCI = (dia, horas, horasT, horasR) => {
-
-    return dia >= 1 && dia <= 5 && (horasT > 0.88 || horasT < 0.21) && horasR < 0.21
-        ? (horas)
-        : dia >= 1 && dia <= 5 && ((horasT > 0.88 || horasT < 0.21) && horasR > 0.21)
-            ? (0.21 - horasT)
-            : dia === 0
-                ? (horas)
-                : ("-")
+    const horasExtra = dia >= 1 && dia <= 5 && horasT > horasR && horasR <= 0.21 && horasT >= 0.88
+        ? (horasR + 1) - horasT
+        : dia >= 1 && dia <= 5 && horasT > horasR && horasR >= 0.21 && horasT >= 0.88
+            ? (0.21 + 1) - horasT
+            : dia >= 1 && dia <= 5 && horasT > horasR && horasR >= 0.21 && horasT <= 0.88
+                ? (0.21 + 1) - 0.88
+                : dia >= 1 && dia <= 5 && horasT > horasR && horasR <= 0.21 && horasT <= 0.88
+                    ? (horasR + 1) - 0.88
+                    : dia >= 1 && dia <= 5 && horasT >= 0.88
+                        ? horasR - horasT
+                        : dia >= 1 && dia <= 5 && horasT < 0.88
+                            ? horasR - 0.88
+                            : dia === 0
+                                ? horas
+                                : "-"
+    return horasExtra
 }
 
 const aplyHHEEC = (datos) => {
@@ -56,7 +64,7 @@ const aplyHHEEC = (datos) => {
         let dia = datos[`D${counter}`] ? new Date(datos[`D${counter}`].w).getDay() : false
         loop = datos[`A${counter}`] ? datos[`A${counter}`].t !== "z" : false;
 
-        loop  && horasExtras
+        loop && horasExtras
             ?
             (
                 XLSX.utils.sheet_add_aoa(datos,
