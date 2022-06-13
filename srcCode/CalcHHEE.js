@@ -5,8 +5,8 @@ const XLSX = require("xlsx");
 const veintiuno = 0.875;
 const cinco = 0.2083;
 const CalcHHEE = (datos) => {
-
     aplyHHEEC(datos);
+    console.log("HHEE Calculadas correctamente")
 }
 
 const hheeC = (dia, horasT, horasR) => {

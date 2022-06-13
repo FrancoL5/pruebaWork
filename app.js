@@ -14,8 +14,6 @@ switch (command){
         break;
     case "HsExtra":
         horasExtras(dirFile);
-        break;
-    case "calcHHEE":
         HHEE(dirFile);
         break;
     default:
