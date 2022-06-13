@@ -46,8 +46,8 @@ const aplyHHEEC = (datos) => {
     let loop = datos[`A${counter}`] ? datos[`A${counter}`].t !== "z" : false;
 
     while (loop) {
-        let resultadoC = `K${counter}`
-        let resultadoCI = `L${counter}`
+        let resultadoC = `G${counter}`
+        let resultadoCI = `H${counter}`
         let horasR = datos[`F${counter}`] || false
         let horasT = datos[`E${counter}`] || false
         let horasExtras = datos[`I${counter}`] || false
