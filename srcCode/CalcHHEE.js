@@ -42,7 +42,7 @@ const hheeCI = (dia, horas, horasT, horasR) => {
 }
 
 const aplyHHEEC = (datos) => {
-    let counter = 5;
+    let counter = 1;
     let loop = datos[`A${counter}`] ? datos[`A${counter}`].t !== "z" : false;
 
     while (loop) {

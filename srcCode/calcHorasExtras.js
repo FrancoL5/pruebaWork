@@ -1,7 +1,7 @@
 "use strict"
 const XLSX = require("xlsx");
 const calcHorasExtras = (datos) => {
-    let counter = 5;
+    let counter = 1;
     let loop = datos[`A${counter}`] ? datos[`A${counter}`].t !== "z": false;
     let origin = ""
     while (loop) {
