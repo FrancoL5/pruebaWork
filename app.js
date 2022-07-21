@@ -13,8 +13,18 @@ switch (command){
         help()
         break;
     case "HsExtra":
-        horasExtras(dirFile);
-        HHEE(dirFile);
+        horasExtras(dirFile).then(() => {
+            console.log("horas extras calculadas con exito")
+        })
+        .then(()=>{
+            HHEE(dirFile)
+            .then(() => console.log("HHEE al 50 y 100 calculadas con exito"))
+            .catch(error => console.log(error + "\nError en HHEE\nProbablemente el archivo estaba abierto o pasó algo"))
+        })
+        .catch(error =>{
+            console.log(error + "\nError en HorasExtras\nProbablemente el archivo estaba abierto o pasó algo")
+        })
+        
         break;
     default:
         console.log("error");

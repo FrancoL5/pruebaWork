@@ -6,8 +6,12 @@ const horasExtras = (dirFile) => {
     const excel = XLSX.readFile(`${dirFile}`, e_opt)
     const nombreHojas = excel.SheetNames;
     nombreHojas.forEach(e => calcHorasExtras(excel.Sheets[e]))
-    XLSX.writeFile(excel, `${dirFile}`, e_opt);
-    console.log("horas extras calculadas con exito");
+    return new Promise((resolve, reject) => {
+        XLSX.writeFileAsync(`${dirFile}`,excel, e_opt, (err, result) =>{
+            (err) ? reject(err) : resolve(result) 
+        })
+    })
+    // console.log("horas extras calculadas con exito");
 }
 
 module.exports = horasExtras;
