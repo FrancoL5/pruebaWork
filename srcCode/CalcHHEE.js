@@ -9,34 +9,52 @@ const CalcHHEE = (datos) => {
 }
 
 const hheeC = (dia, horasT, horasR) => {
-    return dia >= 1 && dia <= 5 && horasT < veintiuno && horasT >= cinco && horasR <= veintiuno && horasR > cinco
-        ? horasR - horasT
-        : dia >= 1 && dia <= 5 && horasT < veintiuno && horasT >= cinco && horasR > veintiuno
-            ? veintiuno - horasT
-            : dia >= 1 && dia <= 5 && horasT < cinco && horasR <= veintiuno && horasR > cinco
-                ? horasR - cinco
-                : dia >= 1 && dia <= 5 && horasT < veintiuno && horasR <= cinco
+    return (
+        dia >= 1 && dia <= 5
+            ? horasT < veintiuno && horasT >= cinco && horasR <= veintiuno && horasR > cinco
+                ? horasR - horasT
+                 : dia >= 1 && dia <= 5 && horasT < veintiuno && horasT >= cinco && horasR > veintiuno
                     ? veintiuno - horasT
-                    : dia >= 1 && dia <= 5 && horasT < cinco && horasR > veintiuno
-                        ? veintiuno - cinco
-                        : "-"
+                    : dia >= 1 && dia <= 5 && horasT < cinco && horasR <= veintiuno && horasR > cinco
+                        ? horasR - cinco
+                        : dia >= 1 && dia <= 5 && horasT < veintiuno && horasR <= cinco
+                            ? veintiuno - horasT
+                            : dia >= 1 && dia <= 5 && horasT < cinco && horasR > veintiuno
+                                ? veintiuno - cinco
+                                : "-"
+            : "-"
+    )
+    // dia >= 1 && dia <= 5 && horasT < veintiuno && horasT >= cinco && horasR <= veintiuno && horasR > cinco
+    //     ? horasR - horasT
+    //     : dia >= 1 && dia <= 5 && horasT < veintiuno && horasT >= cinco && horasR > veintiuno
+    //         ? veintiuno - horasT
+    //         : dia >= 1 && dia <= 5 && horasT < cinco && horasR <= veintiuno && horasR > cinco
+    //             ? horasR - cinco
+    //             : dia >= 1 && dia <= 5 && horasT < veintiuno && horasR <= cinco
+    //                 ? veintiuno - horasT
+    //                 : dia >= 1 && dia <= 5 && horasT < cinco && horasR > veintiuno
+    //                     ? veintiuno - cinco
+    //                     : "-"
 }
 const hheeCI = (dia, horas, horasT, horasR) => {
-    const horasExtra = dia >= 1 && dia <= 5 && horasT > horasR && horasR <= cinco && horasT >= veintiuno
-        ? (horasR + 1) - horasT
-        : dia >= 1 && dia <= 5 && horasT > horasR && horasR >= cinco && horasT >= veintiuno
-            ? (cinco + 1) - horasT
-            : dia >= 1 && dia <= 5 && horasT > horasR && horasR >= cinco && horasT <= veintiuno
-                ? (cinco + 1) - veintiuno
-                : dia >= 1 && dia <= 5 && horasT > horasR && horasR <= cinco && horasT <= veintiuno
-                    ? (horasR + 1) - veintiuno
-                    : dia >= 1 && dia <= 5 && horasT >= veintiuno
-                        ? horasR - horasT
-                        : dia >= 1 && dia <= 5 && horasT < veintiuno && horasR > veintiuno
-                            ? horasR - veintiuno
-                            : dia === 0
-                                ? horas
-                                : "-"
+    const horasExtra = 
+            dia >= 1 && dia <= 5
+            ? horasT > horasR && horasR <= cinco && horasT >= veintiuno
+                ? (horasR + 1) - horasT
+                : horasT > horasR && horasR >= cinco && horasT >= veintiuno
+                    ? (cinco + 1) - horasT
+                    : horasT > horasR && horasR >= cinco && horasT <= veintiuno
+                        ? (cinco + 1) - veintiuno
+                        : horasT > horasR && horasR <= cinco && horasT <= veintiuno
+                            ? (horasR + 1) - veintiuno
+                            : horasT >= veintiuno
+                                ? horasR - horasT
+                                : horasT < veintiuno && horasR > veintiuno
+                                    ? horasR - veintiuno
+                                    : "-"
+            : dia === 0
+                ? horas
+                : "-"
     return horasExtra
 }
 
