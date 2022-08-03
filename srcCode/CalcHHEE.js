@@ -13,28 +13,17 @@ const hheeC = (dia, horasT, horasR) => {
         dia >= 1 && dia <= 5
             ? horasT < veintiuno && horasT >= cinco && horasR <= veintiuno && horasR > cinco
                 ? horasR - horasT
-                 : dia >= 1 && dia <= 5 && horasT < veintiuno && horasT >= cinco && horasR > veintiuno
+                 : horasT < veintiuno && horasT >= cinco && horasR > veintiuno
                     ? veintiuno - horasT
-                    : dia >= 1 && dia <= 5 && horasT < cinco && horasR <= veintiuno && horasR > cinco
+                    : horasT < cinco && horasR <= veintiuno && horasR > cinco
                         ? horasR - cinco
-                        : dia >= 1 && dia <= 5 && horasT < veintiuno && horasR <= cinco
+                        : horasT < veintiuno && horasR <= cinco
                             ? veintiuno - horasT
-                            : dia >= 1 && dia <= 5 && horasT < cinco && horasR > veintiuno
+                            : horasT < cinco && horasR > veintiuno
                                 ? veintiuno - cinco
                                 : "-"
             : "-"
     )
-    // dia >= 1 && dia <= 5 && horasT < veintiuno && horasT >= cinco && horasR <= veintiuno && horasR > cinco
-    //     ? horasR - horasT
-    //     : dia >= 1 && dia <= 5 && horasT < veintiuno && horasT >= cinco && horasR > veintiuno
-    //         ? veintiuno - horasT
-    //         : dia >= 1 && dia <= 5 && horasT < cinco && horasR <= veintiuno && horasR > cinco
-    //             ? horasR - cinco
-    //             : dia >= 1 && dia <= 5 && horasT < veintiuno && horasR <= cinco
-    //                 ? veintiuno - horasT
-    //                 : dia >= 1 && dia <= 5 && horasT < cinco && horasR > veintiuno
-    //                     ? veintiuno - cinco
-    //                     : "-"
 }
 const hheeCI = (dia, horas, horasT, horasR) => {
     const horasExtra = 

@@ -32,6 +32,26 @@ switch (command){
         .then(() => console.log("Chequeo de horas y su transformación a numeros completa"))
         .catch((err) => console.log(err))
         break;
+    case "HHEET":
+        pruebas(dirFile)
+        .then(() => {
+            console.log("Chequeo de horas y su transformación a numeros completa")
+            
+            horasExtras(dirFile).then(() => {
+                console.log("horas extras calculadas con exito")
+            })
+            .then(()=>{
+                HHEE(dirFile)
+                .then(() => console.log("HHEE al 50 y 100 calculadas con exito"))
+                .catch(error => console.log(error + "\nError en el cálculo de HHEE al 50 y 100\nProbablemente el archivo estaba abierto o pasó algo"))
+            })
+            .catch(error =>{
+                console.log(error + "\nError en el cálculo del total de horas extras\nProbablemente el archivo estaba abierto o pasó algo")
+            })
+        })
+        .catch((err) => console.log(err))
+
+        break;
     default:
         console.log("error");
 }

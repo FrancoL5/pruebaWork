@@ -23,6 +23,7 @@ const handdler = (data) => {
         loop = data[`A${counter}`] ? data[`A${counter}`].t !== "z": false;
         if(loop){
             if(data[`E${counter}`].t !== "s" || data[`F${counter}`] !== "s"){
+                number = false
             } else if ( data[`E${counter}`].t === "n" || data[`F${counter}`] === "n"){
                 number = true
                 console.log("En la fila "+ counter + "Uno de los horarios es un numero");
