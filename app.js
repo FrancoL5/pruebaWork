@@ -3,10 +3,12 @@
 const horasExtras = require("./srcCode/HorasExtras")
 const HHEE = require("./srcCode/HHEE")
 const help = require("./srcCode/help");
-const pruebas = require("./srcCode/checkHours");
+const checkHours = require("./srcCode/checkHours");
+const processIrr = require("./irregularidades/processIrr");
 
 const command = process.argv[2];
 const dirFile = process.argv[3];
+const rows = Number (process.argv[4]);
 
 
 switch (command){
@@ -28,12 +30,12 @@ switch (command){
         
         break;
     case "checkHours":
-        pruebas(dirFile)
+        checkHours(dirFile)
         .then(() => console.log("Chequeo de horas y su transformación a numeros completa"))
         .catch((err) => console.log(err))
         break;
     case "HHEET":
-        pruebas(dirFile)
+        checkHours(dirFile)
         .then(() => {
             console.log("Chequeo de horas y su transformación a numeros completa")
             
@@ -51,6 +53,11 @@ switch (command){
         })
         .catch((err) => console.log(err))
 
+        break;
+    case "generarIrr" :
+        processIrr(dirFile, rows)
+            .then(() => console.log("todo bien"))
+            .catch((e) => console.log(e))
         break;
     default:
         console.log("error");
